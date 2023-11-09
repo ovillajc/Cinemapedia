@@ -55,6 +55,7 @@ class _HomeViewState extends ConsumerState<_HomeView> {
 
     // Widget para poder manterner el appbar en su sitio al hacer scroll
     return CustomScrollView(
+      physics: const ClampingScrollPhysics(),
       slivers: [
         // Para mantener el appbar en su sitio al hacer scroll
         const SliverAppBar(

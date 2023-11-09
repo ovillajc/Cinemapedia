@@ -1,4 +1,5 @@
 import 'package:cinemapedia/infrastructure/mappers/movie_mapper.dart';
+import 'package:cinemapedia/infrastructure/models/themoviedb/movie_details.dart';
 import 'package:cinemapedia/infrastructure/models/themoviedb/themoviedb_response.dart';
 import 'package:dio/dio.dart';
 
@@ -87,6 +88,36 @@ class MovidedbDatasource extends MoviesDatasource {
       '/movie/upcoming',
       queryParameters: {
         'page': page,
+      },
+    );
+
+    return _jsonToMovies(response.data);
+  }
+
+  @override
+  Future<Movie> getMovieById(String id) async {
+    final response = await dio.get('/movie/$id');
+
+    // verificar que la respuesta del servidor e indicar si encontro la pelicula
+    if (response.statusCode != 200) throw Exception('Movie not found: $id');
+
+    final movieDetails = MovieDetails.fromJson(response.data);
+
+    // Mapear la respuesta
+    final movie = MovieMapper.movieDetailsToEntity(movieDetails);
+
+    return movie;
+  }
+
+  @override
+  Future<List<Movie>> searchMovies(String query) async {
+    // Regresar un arreglo vacio encaso de que aun no se realize una busqueda
+    if (query.isEmpty) return [];
+
+    final response = await dio.get(
+      '/search/movie',
+      queryParameters: {
+        'query': query,
       },
     );
 
