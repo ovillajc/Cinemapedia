@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:cinemapedia/infrastructure/datasources/actor_movidedb_datasource.dart';
+import 'package:cinemapedia/infrastructure/datasources/actor_movidedb_datasource_implementation.dart';
 import 'package:cinemapedia/infrastructure/repositories/actor_repository_implementation.dart';
 
 /* 

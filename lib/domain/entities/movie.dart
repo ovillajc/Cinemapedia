@@ -1,5 +1,14 @@
+import 'package:isar/isar.dart';
+
+//
+part 'movie.g.dart';
+
 // Clase que hara de modelo para los datos recibidos del api
+// Anotacion de clase para manejarla como una entidad de isardb
+@collection
 class Movie {
+  Id? isarId;
+
   final bool adult;
   final String backdropPath;
   final List<String> genreIds;
